@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<center>
+		<h1><small>Change your password</small></h1>
+		<hr class="colorgraph">
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+			<%= devise_error_messages! %>
+			<%= f.hidden_field :reset_password_token %>
+				<%= f.password_field :password,:placeholder => "Password", class: "form-control" %>
+		  		<%= f.password_field :password_confirmation,:placeholder => "Confirm Password", class: "form-control" %>
+		  		<hr>
+		  		<%= f.submit "Change my password", class: "btn btn-primary btn-lg btn-block" %><br />
+		<% end %>
+		<%= render "devise/shared/links" %>
+		</center>
+	</div>
+	<div class="col-md-4"></div>
+</div>

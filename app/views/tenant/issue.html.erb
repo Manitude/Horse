@@ -1,0 +1,162 @@
+<ol class="breadcrumb">
+    <li><%= link_to "Home", tenant_path %></li>
+        <li>Issue</li>
+        <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
+</ol><h2 id="sec0">Issues reported: </h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <form>
+            <div class="row">
+              <div class="col-xs-8">
+                <div class="btn-group btn-toggle"> 
+                  <a href="#tab1" class="btn btn-default" data-toggle="tab" >By Tenant</a>
+                  <!-- <a href="#tab2" class="btn btn-primary active" data-toggle="tab" >By Landlord</a>  -->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="panel-body">
+          <br />
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                  <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+                    <% unless @issue_list.blank? %>
+                      <thead>
+                        <tr>
+                          <th style="width:15%">Severity</th>
+                          <th style="width:30%">Description</th>
+                          <th style="width:15%" class="hidden-phone">Reporting date</th>
+                          <th style="width:15%" class="hidden-phone">Resolved date</th>
+                          <th style="width:10%" class="hidden-phone">Status</th>
+                          <th style="width:15%" class="hidden-phone" data-toggle="tooltip" data-placement="top" title="You may choose to edit/delete a roommate!">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @issue_list.each do |data| %>
+                              <tr>
+                              <td style="text-align:center;"><% data[:severity] %></td>
+                              <td><% data[:description] %></td>
+                              <td style="text-align:center;"><% data[:reporting_date] %></td>
+                              <td style="text-align:center;"><% data[:resolved_date] %></td>
+                              <td style="text-align:center;"><% data[:status] %></td>
+                              <td class="hidden-phone">
+                                <div class="btn-group">
+                                  <button data-toggle="dropdown" class="btn btn-xs dropdown-toggle" data-original-title="" title="">
+                                  Action 
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                  <li>
+                                    <a href="#">Resolved</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">Pending</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">Re-open</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    <% else %>
+                      <thead>
+                        <tr>
+                          <th style="width:100%">There are no issues raised by you yet.</th>
+                        </tr>
+                      </thead>
+                    <% end %>
+                  </table>
+            </div>
+            <!-- <div class="tab-pane active" id="tab2">
+                   <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+                      <thead>
+                        <tr>
+                          <th style="width:5%">No.</th>
+                          <th style="width:30%">Name</th>
+                          <th style="width:20%" class="hidden-phone">Contact</th>
+                          <th style="width:15%" class="hidden-phone">Bank Detail</th>
+                          <th style="width:10%" class="hidden-phone">email ID</th>
+                          <th style="width:10%" class="hidden-phone"><span data-toggle="tooltip" data-placement="top" title="Status of rent paid for the current month!">Rent Status</span></th>
+                          <th style="width:10%" class="hidden-phone" data-toggle="tooltip" data-placement="top" title="You may choose to edit/delete a roommate!">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @issue_list.each do |data| %>
+                              <tr>
+                              <td style="text-align:center;"><% data[:severity] %></td>
+                              <td><% data[:description] %></td>
+                              <td style="text-align:center;"><% data[:reporting_date] %></td>
+                              <td style="text-align:center;"><% data[:resolved_date] %></td>
+                              <td style="text-align:center;"><% data[:status] %></td>
+                              <td class="hidden-phone">
+                                <span class="label label label-info">New</span>
+                              </td>
+                              <td class="hidden-phone">
+                                <div class="btn-group">
+                                  <button data-toggle="dropdown" class="btn btn-xs dropdown-toggle" data-original-title="" title="">
+                                  Action 
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                  <li>
+                                    <a href="#">Pay their rent</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">Edit</a>
+                                  </li>
+                                  <li>
+                                    <a href="#">Delete</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+            </div>  -->
+          </div>
+          <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal">Report An Issue</button>
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Report an issue!</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= form_for :issue_details, :html => {:id => "issue_detail_id"}, :url => create_an_issue_path(:format => :js) do |f| %>
+                        <div class="form-group">
+                          <div class="col-md-8"><%= f.select 'severity', options_for_select(["High Priority","Medium Priority","Low priority"],"Low priority"), {prompt: "-- Select the priority--"}, {:id => "severity",:class => 'form-control'}%></div><br />
+                          <div class="col-md-8 col-xs-12"><%= f.text_area :description, :class => 'form-control', :placeholder => 'Enter the description', :style => "height: 90px;" %></div>
+                        </div><br />
+                  </div><br /><br /><br />
+                  <div class="modal-footer">
+                    <%= f.submit "Save", :id => "save_issue_details", class: "btn btn-primary btn-lg pull-right" %>
+                    <br />
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  
+
+<!-- <script type="text/javascript">
+  $('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');
+    if ($(this).find('.btn-primary').size()>0) {
+      $(this).find('.btn').toggleClass('btn-primary');
+    }
+    $(this).find('.btn').toggleClass('btn-default');
+});
+</script> -->

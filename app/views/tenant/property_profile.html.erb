@@ -1,0 +1,48 @@
+<ol class="breadcrumb">
+    <li><%= link_to "Home", tenant_path %></li>
+        <li>Flat Profile</li>
+        <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
+</ol>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+           Flat Profile   
+        </h4>
+    </div>
+    <div class="panel-body">
+       <%= form_for :property, :html => {:id => "property_form_id"}, :url => save_property_details_path(:format => :js) do |f| %>
+              Description(in one line): <%= f.text_field :description, :placeholder => "Eg. 2BHK in Andheri"%><br />
+              Rent amount : <%= f.text_field :rent %><br />
+              Deposit : <%= f.text_field :deposit %><br />
+              Locality : <%= f.text_field :area %><br />
+              Zip Code : <%= f.text_field :pin_code %><br />
+              Postal Address : <%= f.text_field :postal_address %><br />
+              Landmark : <%= f.text_field :landmark %><br />
+              City : <%= f.select 'city', options_for_select(["Chennai","Pune"],"Chennai") %><br />  
+              State : <%= f.select 'state', options_for_select(["Tamil Nadu","Maharashtra"],"Tamil Nadu") %><br />
+              Lease Type : <%= f.select 'lease_type', options_for_select(["Family only","Bachelors","Spinsters","Available to all"],"Available to all") %><br />
+              Built up area : <%= f.text_field :built_up_area %><%= select_tag 'unit_for_built_up_area', options_for_select(["sq. ft."],"sq. ft.") %><br />
+              Furnishing : <%= f.select 'furnishing', options_for_select(["Fully-furnished","Semi-furnished","Unfurnished"],"Unfurnished") %><br />
+              Water Supply Type : <%= f.text_field :water_supply_type %><br />
+              Direction Facing : <%= f.select 'direction_facing', options_for_select(["North","East","South","West"],"East") %><br />
+              Bedroom : <%= f.select 'bedroom', options_for_select([1,2,3,4,5],2) %><br />
+              Bathroom :<%= f.select 'bathroom', options_for_select([1,2,3,4,5],2) %>
+              AC : <%= f.select 'ac', options_for_select([1,2,3,4,5],2) %><br />
+              TV : <%= f.select 'tv', options_for_select([1,2,3,4,5],1) %><br />
+              Wardrobe : <%= f.text_field :wordrobe %><br />
+              Bed : <%= f.select 'bed', options_for_select([1,2,3,4,5],2) %><br />
+              Dining table : <%= f.select 'dining_table', options_for_select([1,2,3,4,5],1) %><br />
+              Parking : <%= f.select 'parking', options_for_select([["true",1],["false",0]],0) %><br />
+              Refrigerator : <%= f.select 'refrigerator', options_for_select([["true",1],["false",0]],0) %><br />
+              Geyser : <%= f.select 'geyser', options_for_select([["true",1],["false",0]],0) %><br />
+              Sofa : <%= f.select 'sofa', options_for_select([["true",1],["false",0]],0) %><br />
+              Gas Pipeline : <%= f.select 'gas_pipeline', options_for_select([["true",1],["false",0]],0) %><br />
+              Gym : <%= f.select 'gym', options_for_select([["true",1],["false",0]],0) %><br />
+              Swimming Pool : <%= f.select 'swimming_pool', options_for_select([["true",1],["false",0]],0) %><br />
+              Lift : <%= f.select 'lift', options_for_select([["true",1],["false",0]],0) %><br />
+              Washing machine : <%= f.select 'washing_machine', options_for_select([["true",1],["false",0]],0) %><br />
+              Microwave : <%= f.select 'microwave', options_for_select([["true",1],["false",0]],0) %><br />
+       <%= f.submit 'Save', :name => "save_property" %>
+       <% end %>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<!-- <div class="container">
+    <div class="col-md-9">
+        <div class="nav nav-pills wizard"> <a href="#"><span class="badge">1</span>Home</a>
+ <a href="#"><span class="badge">1</span>Profile</a>
+
+            <a href="#"><span class="badge">1</span>Messages</a>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>  -->
+<ol class="breadcrumb">
+    <li><%= link_to "Home", tenant_path %></li>
+        <li>Pay Now</li>
+        <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
+</ol>
+<center><h3 id="sec0">A smart way to pay your rent is here!</h3></center>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon"><b><span class="WebRupee">&#x20B9;</span></b></span>
+                  <input type="text" value="20,000" class="form-control" placeholder="Rent Amount">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Due Date: </span>
+                  <input type="text" class="form-control" disabled="disabled"><br />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab1" data-toggle="tab">Credit Card</a></li>
+              <li><a href="#tab2" data-toggle="tab">Debit Card</a></li>
+              <li><a href="#tab3" data-toggle="tab">Net Banking</a></li>
+            </ul><br />
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab1">
+                  <div class="col-md-12">
+                    <%= form_for :property, :html => {:id => "property_form_id"}, :url => pay_rent_through_credit_path(:format => :js) do |f| %>
+                      <div class=".col-xs-6 .col-sm-4">
+                        Cardholder's Name :<%= f.text_field :cardholder_name, :placeholder => "Eg. Sachin Tendulkar"%>
+                      </div>
+                      <div class=".col-xs-6 .col-sm-4">
+                        Card Number :   <%= f.text_field :card_number, :placeholder => "Eg. 1111222233334444"%>
+                      </div>
+                      <div class=".col-xs-6 .col-sm-4">
+                        Valid till: <%= f.text_field :valid_till, :placeholder => "Eg. 03/2014"%>&nbsp;&nbsp;
+                        CVC:<%= f.text_field :cvc, :placeholder => "Eg. 123"%>
+                      </div>
+                      Remember me: <%= f.check_box :remember %><!--,:checked => @topic.selected %> --><br>
+                      <%= f.submit 'Pay Now', :name => "pay_now" %>
+                    <% end %>
+                  </div>
+              </div>
+              <div class="tab-pane" id="tab2">
+                <div class="col-xs-8">
+                  <div class="col-md-12">
+                    <%= form_for :property, :html => {:id => "property_form_id"}, :url => pay_rent_through_debit_path(:format => :js) do |f| %>
+                      Cardholder's Name: <%= f.text_field :cardholder_name, :placeholder => "Eg. Sachin Tendulkar"%><br />
+                      Card Number: <%= f.text_field :card_number, :placeholder => "Eg. 1111222233334444"%><br />
+                      Valid till: <%= f.text_field :valid_till, :placeholder => "Eg. 03/2014"%>
+                      CVC: <%= f.text_field :cvc, :placeholder => "Eg. 123"%><br />
+                      Remember me: <%= f.check_box :remember %><!--,:checked => @topic.selected %> --><br>
+                      <%= f.submit 'Pay Now', :name => "pay_now" %>
+                    <% end %>
+                <!--    <form role="form">
+                      <div class="input-group">
+                        <span class="input-group-addon">Cardholder's Name</span>
+                        <input type="text" class="form-control">
+                      </div><br/ >
+                      <div class="input-group">
+                        <span class="input-group-addon">Card Number</span>
+                        <input type="text" class="form-control" placeholder="Enter your 16 digit card number">
+                      </div><br/ >
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="input-group">
+                            <span class="input-group-addon">Valid till</span>
+                            <input type="text" class="form-control" placeholder="MM">
+                            <span class="input-group-addon"> </span>
+                            <input type="text" class="form-control" placeholder="YYYY">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="input-group">
+                            <span class="input-group-addon">CVC</span>
+                            <input type="text" class="form-control" placeholder="Ex 331">
+                          </div>
+                        </div>
+                      </div><br/ >
+                      <button type="submit" class="btn btn-primary">Pay Now</button>
+                    </form> -->
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab3">Content here 3...</div>
+            </div>
+          </div>
+      </div>
+    </div> 
+  </div>

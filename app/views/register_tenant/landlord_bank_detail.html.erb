@@ -1,0 +1,156 @@
+<div class="fuelux">
+<div class="well">
+  <div id="MyWizard" class="wizard">
+    <ul class="steps">
+      <li data-target="#step1" class="active"><span class="badge badge-info">1</span>Landlord's Account Detail<span class="chevron"></span></li>
+      <li data-target="#step2"><span class="badge">2</span>User Profile<span class="chevron"></span></li>
+      <li data-target="#step3"><span class="badge">3</span>Flat Profile<span class="chevron"></span></li>
+    </ul>
+    <div class="actions">
+      <button class="btn btn-mini btn-prev" id="previous"> <i class="icon-arrow-left"></i>Prev</button>
+      <button class="btn btn-mini btn-next" id="next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+    </div>
+  </div>
+  <div class="step-content">
+    <div class="step-pane active" id="step1"><!-- <h2><i class="icon-magic"> </i> &nbsp; Let's get you register quickly.</h2> -->
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <center>
+          <h1><small>Landlord bank details!</small></h1>
+          <hr class="colorgraph">
+          <%= form_for :bank_details, :html => {:id => "landlord_bank_detail_id"}, :url => save_landlord_bank_info_path(:format => :js) do |f| %>
+                <%= f.text_field :payee_name, :autofocus => true,:placeholder => "Landlord's name", class: "form-control" %>
+                <%= f.text_field :payee_account_number, :placeholder => "Landlord's account number", class: "form-control" %>
+                <%= f.text_field :payee_account_number, :placeholder => "Confirm landlord's account number", class: "form-control" %>
+                <%= f.text_field :payee_ifsc_code, :placeholder => "IFSC Code", class: "form-control" %>
+                <%= f.text_field :payee_contact_number, :placeholder => "Landlord's mobile number(optional)", class: "form-control" %>
+                <%= f.text_field :payee_email, :placeholder => "Landlord's mobile number(optional)", class: "form-control" %>
+                <hr>
+                <%= f.text_field :name,:placeholder => "Your name as in your Bank account", class: "form-control" %>
+                <%= f.text_field :bank_account_number,:placeholder => "Your bank account number", class: "form-control" %>
+                <%= f.text_field :bank_account_number,:placeholder => "Confirm your bank account number", class: "form-control" %>
+                <%= f.text_field :ifsc,:placeholder => "your IFSC Code", class: "form-control" %>
+                <%= f.text_field :contact_no,:placeholder => "your contact number", class: "form-control" %>
+                <hr>
+                <%= f.submit "Next", :id => "bank_details_next", class: "btn btn-primary btn-lg btn-block" %><br />
+          <% end %>
+          </center>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <div class="step-pane" id="step2">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <center>
+          <h1><small>User details!</small><input class="btn btn-warning pull-right" id="btnWizardSkip" value="Skip" type="button"></h1>
+          <hr class="colorgraph">
+          <%= form_for :user_detail, :html => {:id => "user_detail_id"}, :url => save_user_info_path(:format => :js) do |f| %>
+                <%= f.text_field :first_name, :placeholder => "Your first name", class: "form-control"%>
+                <%= f.text_field :last_name, :placeholder => "Your last name", class: "form-control"%>
+                <%= f.text_field :contact_number, :placeholder => "Your mobile number", class: "form-control"%>
+                <%= f.text_field :pan, :placeholder => "Your PAN card number", class: "form-control"%>
+                <hr>
+                <%= f.submit "Next", class: "btn btn-primary btn-lg btn-block" %><br />
+          <% end %>
+          </center>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+    <div class="step-pane" id="step3">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <center>
+          <h1><small>Your property details!</small><input class="btn btn-warning pull-right" id="btnWizardSkip" value="Skip" type="button"></h1>
+          <hr class="colorgraph">
+          </center>
+        </div>
+        <div class="col-md-4"></div>
+        <%= form_for :property, :html => {:id => "property_form_id"}, :url => save_property_details_path(:format => :js) do |f| %>
+        <div class="col-md-6" id="property_detail">
+            <div class="form-group">
+              <%= f.label :description_label, "Description", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :description, :placeholder => "eg. 2BHK in Andheri", class: "form-control"%></div><br />
+              <%= f.label :rent_label, "Rent amount", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :rent, :placeholder => "eg. 20000", class: "form-control" %></div><br />
+              <%= f.label :deposit_label, "Deposit amount", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :deposit, :placeholder => "eg. 100000", class: "form-control" %></div><br />
+              <%= f.label :area_label, "Locality", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :area, :placeholder => "eg. Juhu", class: "form-control" %></div><br />
+              <%= f.label :pin_label, "Pin Code", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :pin_code, :placeholder => "eg. 400049", class: "form-control" %></div><br />
+              <%= f.label :postal_address_label, "Postal Address", :class=>'col-md-4 control-label' %>
+              <div class="col-md-8"><%= f.text_field :postal_address, :placeholder => "First line eg. House no. 12, Street 13", class: "form-control" %></div><br />
+              <div class="col-md-4"><br /></div>
+              <div class="col-md-8"><%= f.text_field :postal_address_2, :placeholder => "Next line eg. Sector 8A", class: "form-control" %></div><br />
+              <%= f.label :landmark_label, "Landmark", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :landmark, :placeholder => "eg. Near Infosys Campus", class: "form-control" %></div><br />
+              <%= f.label :city_label, "City", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.text_field :city, :placeholder => "eg. Pune", class: "form-control" %></div><br />
+              <%= f.label :state_label, "State", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'state', options_for_select(["Tamil Nadu","Maharashtra"]), {prompt: "-- Select --"}, {:id => "state",:class => 'form-control'} %></div><br />
+              <%= f.label :built_up_area_label, "Built up area", :class=>'col-md-4' %>
+              <div class="col-md-6"><%= f.text_field :built_up_area, :placeholder => "eg. 1200", class: "form-control" %></div><label><small>sq. feet</small></label><br />
+              <%= f.label :lease_type_label, "Lease Type", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'lease_type', options_for_select(["Family only","Bachelors","Spinsters","Available to all"]), {prompt: "-- Select --"}, {:id => "lease_type",:class => 'form-control'} %></div><br />
+              <%= f.label :water_supply_type_label, "Water Supply", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select(:water_supply_type, [['Boring Water', 1], ['Supply Water', 2]], {prompt: "-- Select --"}, {:id => "water_supply_type",:class => 'form-control'}) %></div><br />
+              <%= f.label :direction_facing_label, "Direction facing", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'direction_facing', options_for_select(["North","East","South","West"]), {prompt: "-- Select --"}, {:id => "direction_facing",:class => 'form-control'} %></div><br />
+              <%= f.label :furnishing_label, "Furnishing", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'furnishing', options_for_select(["Fully-furnished","Semi-furnished","Unfurnished"]), {prompt: "-- Select --"}, {:id => "furnishing",:class => 'form-control'}%></div><br />
+            </div>
+        </div>
+        <div class="col-md-6" id="furnish_detail">
+            <%= f.label :bedroom_label, "Bedroom", :class=>'col-md-4', :id =>'bedroom' %>
+              <div class="col-md-8"><%= f.select 'bedroom', options_for_select([1,2,3,4,5,"more"]), {prompt: "-- Select --"}, {:id => "bedroom",:class => 'form-control'} %></div><br />
+              <%= f.label :bathroom_label, "Bathroom", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'bathroom', options_for_select([1,2,3,4,5,"more"]), {prompt: "-- Select --"}, {:id => "bathroom",:class => 'form-control'} %></div><br />
+              <%= f.label :wardrobe_label, "Wardrobe", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'wardrobe', options_for_select(["Yes","No"]), {prompt: "-- Select --"}, {:id => "tv",:class => 'form-control'} %></div><br />
+              <%= f.label :ac_label, "AC", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'ac', options_for_select([1,2,3,4,5,"more"]), {prompt: "-- Select --"}, {:id => "ac",:class => 'form-control'} %></div><br />
+              <%= f.label :tv_label, "TV", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'tv', options_for_select([1,2,3,4,5,"more"]), {prompt: "-- Select --"}, {:id => "tv",:class => 'form-control'} %></div><br />
+              <%= f.label :dining_table_label, "Dining Table", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'dining_table', options_for_select(["Yes",1],["No",0]), {prompt: "-- Select --"}, {:id => "dining_table",:class => 'form-control'} %></div><br />
+              <%= f.label :parking_label, "Parking", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'parking', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "parking",:class => 'form-control'} %></div><br />
+              <%= f.label :refrigerator_label, "Refrigerator", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'refrigerator', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "refrigerator",:class => 'form-control'} %></div><br />
+              <%= f.label :geyser_label, "Geyser", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'geyser', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "refrigerator",:class => 'form-control'} %></div><br />
+              <%= f.label :sofa_label, "Sofa", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'sofa', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "sofa",:class => 'form-control'} %></div><br />
+              <%= f.label :gas_pipeline_label, "Gas pipeline", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'gas_pipeline', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "gas_pipeline",:class => 'form-control'} %></div><br />
+              <%= f.label :gym_label, "Gymnasium", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'gym', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "refrigerator",:class => 'form-control'} %></div><br />
+              <%= f.label :swimming_pool, "Swimming pool", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'swimming_pool', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "swimming_pool",:class => 'form-control'} %></div><br />
+              <%= f.label :lift_label, "Lift", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'lift', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "lift",:class => 'form-control'} %></div><br />
+              <%= f.label :washing_machine_label, "Wash machine", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'washing_machine', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "washing_machine",:class => 'form-control'} %></div><br />
+              <%= f.label :microwave_label, "Microwave", :class=>'col-md-4' %>
+              <div class="col-md-8"><%= f.select 'microwave', options_for_select([["Yes",1],["No",0]]), {prompt: "-- Select --"}, {:id => "microwave",:class => 'form-control'} %></div><br />
+        </div>
+        <hr>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <%= f.submit "Finish", :name => "save_property", class: "btn btn-primary btn-lg btn-block" %><br />
+        <% end %>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
+  

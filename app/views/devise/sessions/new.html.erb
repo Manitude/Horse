@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<center>
+		<h1><small>Welcome back! Please sign in</small></h1>
+		<hr class="colorgraph">
+		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+			<%= devise_error_messages! %>
+		  		<%= f.email_field :email, :autofocus => true, :placeholder => "Email", class: "form-control" %>
+		  		<%= f.password_field :password,:placeholder => "Password", class: "form-control" %><br />
+				<%= f.check_box :remember_me, class: "pull-left"%> <%= f.label :remember_me, class: "pull-left" %>
+				<div class="pull-right"><%= link_to "Forgot your password?", new_password_path(resource_name) %></div>
+		  		<br />
+		  		<%= f.submit "Login", class: "btn btn-success btn-lg btn-block" %><br />
+		<% end %>
+		<%= render "devise/shared/links" %>
+		</center>
+	</div>
+	<div class="col-md-4"></div>
+</div>

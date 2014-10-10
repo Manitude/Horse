@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RentBazaar</title>
+</head>
+<body class="grey">
+	<div class="navbar navbar-inverse navbar-static-top">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">RentBazaar</a>
+	    </div>
+	    <div class="collapse navbar-collapse">
+	      <ul class="nav navbar-nav navbar-right">
+	      	<!--<li><a href="/signup">Sign Up</a></li>
+                <li class="divider-vertical"></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+						<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+							<form method="post" action="login" accept-charset="UTF-8">
+								<input style="margin-bottom: 15px;" type="text" placeholder="Username" id="username" name="username">
+								<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+								<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
+								<label class="string optional" for="user_remember_me"> Remember me</label>
+								<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+								<label style="text-align:center;margin-top:5px">or</label>
+                                <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+								<input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
+							</form>
+						</div>
+					</li> -->
+            <% if user_signed_in? %>
+			   <li><%= link_to "Sign Out", logout_path, {:class =>'active'}, :method => :delete %></li>
+			<% else %>
+			   <li><%= link_to "Sign up", new_user_registration_path, {:class =>'active'} %></li>
+			   <li><%= link_to "Login", new_user_session_path, {:class =>'dropdown-toggle'}, :data => { :toggle => 'dropdown'} %>
+			   </li>
+			<% end %>
+	      </ul>
+	    </div><!--/.nav-collapse -->
+	  </div>
+	</div>
+	<%= yield %>
+	<!-- FOOTER: begin -->
+  	<hr class="featurette-divider"></hr>
+    <footer>
+    	<p class="pull-right"><a href="#">Back to top&nbsp;&nbsp;</a></p>
+    	<p class="text-muted credit">&nbsp;&nbsp;&nbsp;&nbsp;Product Copyright <a href="https://www.linkedin.com/profile/view?id=89879679&trk=nav_responsive_tab_profile_pic">Manish Tewary</a> .</p>
+    </footer>
+    <!-- FOOTER: end -->
+  <%= stylesheet_link_tag "application","bootstrap.min" %>
+  <%= javascript_include_tag "jquery","application","bootstrap.min" %>
+  <%= csrf_meta_tags %>
+</body>
+</html>
