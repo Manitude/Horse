@@ -1,0 +1,35 @@
+<div class="col-md-10" id="edit_details" style="<%if @data%>display:none;<%end%>;">
+    <%= form_for :user_detail, :html => {:id => "profile_detail_id"}, :url => save_user_info_path(:format => :js) do |f| %>
+      <div class="input-group">
+        <span class="input-group-addon">Name</span>
+        <%= f.text_field :name, :value => @data ? @data[:name] : nil, :placeholder => "your name", class: "form-control"%>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Contact</span>
+        <%= f.text_field :contact_number, :value => @data ? @data[:contact_number] : nil, :placeholder => "your contact number", class: "form-control"%>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Bank A/c No</span>
+        <%= f.text_field :bank_account_number, :value => @data ? @data[:bank_account_number] : nil, :placeholder => "your account number", class: "form-control"%>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">Confirm A/c No</span>
+        <%= f.text_field :bank_account_number, :placeholder => "confirm account number", class: "form-control"%>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">IFSC</span>
+        <%= f.text_field :ifsc, :value => @data ? @data[:ifsc] : nil, :placeholder => "IFSC code", class: "form-control"%>
+      </div>
+      <div class=".col-xs-6 .col-md-4 pull-right">
+        <a id="reset_bank_details" class="btn btn-default">Reset</a>
+        <%= f.submit "Save", :id => "save_bank_details", class: "btn btn-primary" %>
+      </div>
+              <!-- <div class="col-md-4">
+                    <div class="text-center">
+                        <img src="//placehold.it/100" class="avatar img-thumbnail" alt="avatar">
+                        <h6 class="">Upload your photo!</h6>
+                        <input class="form-control" type="file">
+                    </div>
+                </div> -->
+  <% end %>
+</div>

@@ -4,7 +4,7 @@
         <li>Payment History</li>
         <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
 </ol>
-<div class="panel panel-default">
+<div class="panel panel-default" style="display:none;">
 	<div class="panel-heading">
 	    <h4 class="panel-title">
 	        <button type="button" class="btn btn-danger">0 Late</button>
@@ -20,39 +20,17 @@
     </div>
     <div class="panel-body">
 		<div class="table-responsive">
-			<table class="table table-condensed table-striped table-bordered table-hover no-margin">
-				<%if @roommate_data.blank? %>
-	              <thead>
-	                <tr>
-	                  <th style="width:100%">There are no payments done from your account.</th>
-	                </tr>
-	              </thead>
-	            <% else %>
-					<thead>
-						<tr>
-						    <th style="width:5%">No.</th>
-						    <th style="width:15%">Rent paid</th>
-						    <th style="width:20%" class="hidden-phone">Due Date</th>
-						    <th style="width:20%" class="hidden-phone">Paid on</th>
-						    <th style="width:20%" class="hidden-phone">Payment method</th>
-						    <th style="width:20%" class="hidden-phone" data-toggle="tooltip" data-placement="top" title="You may choose to edit/delete a roommate!">Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% @payment_data.each do |data| %>
-						    <tr>
-						        <td style="text-align:center;">1</td>
-						        <td><% data[:amount] %></td>
-						        <td style="text-align:center;"><% data[:payment_due_date] %></td>
-						        <td style="text-align:center;"><% data[:payment_done_at] %></td>
-						        <td style="text-align:center;"><% data[:payment_mode] %></td>
-						        <td class="hidden-phone">
-						            <span class="label label label-info">New</span>
-						        </td>
-						    </tr>
-						<% end %>
-					</tbody>
-				<% end %>
+	        <table data-toggle="table" data-url= "ph_data" data-height="299" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-condensed table-striped table-bordered table-hover no-margin">
+				<thead>
+					<tr>
+					    <th data-field="purpose" data-align="center" data-formatter="purposeFormatter" style="width:5%;">Purpose</th>
+					    <th data-field="landlord_name" data-align="center">Landlord</th>
+					    <th data-field="amount" data-align="center">Amount</th>
+					    <th data-field="payment_done_at" data-formatter="dateFormatter" data-align="center">Paid on</th>
+					    <th data-field="payment_mode" data-align="center">Mode of Payment</th>
+					    <th data-field="status" data-formatter="statusFormatter" data-align="center">Status</th>
+					</tr>
+				</thead>
 			</table>
 		</div>
 	</div>

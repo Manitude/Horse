@@ -37,19 +37,26 @@ Horse::Application.configure do
   config.assets.debug = true
 
   # To set up the default URL options for the Devise mailer in each environment
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3333 }
+  config.action_mailer.default_url_options = { host: 'localhost:3333' }
   config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries = false
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-                    :address        => "smtp.gmail.com",
-                    :port           => 587,
-                    :authentication => :plain,
-                    :user_name      => "mptewary@gmail.com",
-                    :password       => "Gayatri@Shahdeo23",
-                    :enable_starttls_auto => true
+                  #  :address        => "smtp.gmail.com",
+                  #  :port           => 587,
+                  #  :authentication => :plain,
+                  #  :user_name      => "mptewary@gmail.com",
+                  #  :password       => "Gayatri@Shahdeo23",
+                  #  :enable_starttls_auto => true
+
+                   :address        => "smtp.mandrillapp.com",
+                   :port           => 587,
+                   :enable_starttls_auto => true,
+                   :user_name      => "manish.extreme@gmail.com",
+                   :password       => "bGQiBO_1lE7aZ0FzTo9Hog",
+                   :authentication => "login"
  }
 
 end

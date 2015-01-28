@@ -15,7 +15,7 @@ Horse::Application.routes.draw do
   match 'tenant' => 'tenant#index', :as => :tenant
   match 'landlord' => 'landlord#index', :as => :landlord
 
-  match 'tenant/pay_now' => 'tenant#index', :as => :tenant_pay_now
+  match 'pay_now' => 'tenant#index', :as => :tenant_pay_now
   match 'tenant/dashboard' => 'tenant#dashboard', :as => :tenant_dashboard
   match 'tenant/roommate' => 'tenant#roommate', :as => :tenant_roommate
   match 'tenant/payment_history' => 'tenant#payment_history', :as => :tenant_payment_history
@@ -24,13 +24,25 @@ Horse::Application.routes.draw do
   match 'tenant/property_profile' => 'tenant#property_profile', :as => :tenant_property_profile
   match 'tenant/bank_details' => 'tenant#bank_details', :as => :tenant_bank_details
   match 'tenant/setting' => 'tenant#setting', :as => :tenant_setting
+  match 'tenant/review' => 'tenant#review', :as => :tenant_review
+  match 'tenant/rent_receipt' => 'tenant#rent_receipt', :as => :rent_receipt
 
-  match 'tenant/save_property_details' => 'tenant#save_property_details', :as => :save_property_details
+  match 'initiate_payment' => 'tenant#make_payment', :as => :make_payment
+  match 'register_user' => 'tenant#register_user', :as => :save_and_pay
+  match 'register_tenant' => 'tenant#register_tenant', :as => :register_tenant
+  match 'tenant/ph_data' => 'tenant#ph_data', :as => :tenant_ph_data
+  match 'tenant/roommate_data' => 'tenant#roommate_data', :as => :tenant_roommate_data
+
+  match 'tenant/save_property_profile' => 'tenant#save_property_profile', :as => :save_property_profile
   match 'tenant/pay_rent_credit' => 'tenant#pay_rent_through_credit', :as => :pay_rent_through_credit
   match 'tenant/pay_rent_debit' => 'tenant#pay_rent_through_debit', :as => :pay_rent_through_debit
-  match 'tenant/save_user_info' => 'tenant#save_user_info', :as => :save_user_info
+  match 'tenant/save_user_profile' => 'tenant#save_user_profile', :as => :save_user_profile
   match 'tenant/create_roommate' => 'tenant#create_roommate', :as => :create_roommate
   match 'tenant/create_an_issue' => 'tenant#create_an_issue', :as => :create_an_issue
+  match 'search_roommate' => 'tenant#search_roommate', :as => :search_roommate
+  match 'roommate_request_response' => 'tenant#roommate_request_response', :as => :roommate_request_response
+  match 'submit_review' => 'tenant#submit_review', :as => :submit_review
+  
 
   match 'landlord/dashboard' => 'landlord#index', :as => :landlord_dashboard
   match 'landlord/payment_history' => 'landlord#payment_history', :as => :landlord_payment_history
@@ -42,6 +54,7 @@ Horse::Application.routes.draw do
   
   match 'tenant/save_landlord_bank_info' => 'tenant#save_landlord_bank_info', :as => :save_landlord_bank_info
   match 'tenant/save_user_info' => 'tenant#save_user_info', :as => :save_user_info
+  match 'tenant/save_property_details' => 'tenant#save_property_details', :as => :save_property_details
 
 
   # The priority is based upon order of creation:

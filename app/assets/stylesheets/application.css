@@ -15,7 +15,11 @@
  *= require jquery.ui.all
  */
  .grey{
-    background-color: #E5E4E2;
+    background-color: #F0F3F4;
+}
+.input-group-addon{
+	background: none repeat scroll 0 0 #F1F6FC;
+    color: #3A87AD;
 }
 
 .colorgraph {
@@ -32,7 +36,7 @@
 .fuelux .wizard {
 position: relative;
 overflow: hidden;
-background-color: #f9f9f9;
+background-color: #F0F3F4;
 border: 1px solid #d4d4d4;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;

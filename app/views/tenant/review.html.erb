@@ -1,0 +1,287 @@
+<!-- $('input[name=rating]:checked').val();
+$("#rating_div li.active").attr('id');
+ -->
+<ol class="breadcrumb">
+    <li><%= link_to "Home", tenant_path %></li>
+        <li>Review</li>
+        <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
+</ol>
+<div class="alert alert-info" role="alert" id="review_success_alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Thanks </strong>for your review!
+</div>
+<div class="alert alert-danger" role="alert" id="review_failure_alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Oops! there was an error, Please reload the page and try again.</strong>
+</div>
+<div class='row'>
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+            <!-- <h3 class="text-center">Review</h3> -->
+             <!-- tabs -->
+            <div class="tabbable">
+              <ul class="nav nav-tabs" id="rating_div">
+                <li class="active" id="property"><a href="#review" data-toggle="tab">Property</a></li>
+                <li id="landlord"><a href="#review" data-toggle="tab">Landlord</a></li>
+                <li id="website"><a href="#review" data-toggle="tab">Website</a></li>
+              </ul>
+            </div>
+        <!-- /tabs -->
+        </div>
+        <div class="panel-body text-center">
+            <!-- <input id="input-21d" value="2" type="text" class="rating" min=0 max=5 step=0.5 data-size="xs"> -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="review">
+                    <div class="input-group">
+                        <span class="input-group-addon">Give Rating</span>
+                        <div class='col-md-4' style="border:1px solid #c0c0c0;">
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1">1 star</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">One-line Summary</span>
+                        <%= text_field_tag :summary, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Pro</span>
+                        <%= text_field_tag :pros, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Con</span>
+                        <%= text_field_tag :cons, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Review</span>
+                        <div class="span6">
+                            <textarea id="review_content" rows="5" style="width: 100%; border: 1px solid #ccc; padding: 4px;"></textarea>
+                        </div>
+                    </div>        
+                    <div class="panel-footer">
+                        <a id="submit_review" class="btn btn-lg btn-block btn-primary">RATE HERE!</a>
+                    </div>
+                </div>
+                <!-- <div class="tab-pane" id="landlord_review">
+                    <div class="input-group">
+                        <span class="input-group-addon">Give Rating</span>
+                        <div class='col-md-4' style="border:1px solid #c0c0c0;">
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1">1 star</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">One-line Summary</span>
+                        <%= text_field_tag :summary, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Pro</span>
+                        <%= text_field_tag :pros, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Con</span>
+                        <%= text_field_tag :cons, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Review</span>
+                        <div class="span6">
+                            <textarea id="review_content" rows="5" style="width: 100%; border: 1px solid #ccc; padding: 4px;"></textarea>
+                        </div>
+                    </div>       
+                    <div class="panel-footer">
+                        <a id="submit_review" class="btn btn-lg btn-block btn-primary">RATE YOUR LANDLORD</a>
+                    </div>
+                </div>
+                <div class="tab-pane" id="website_review">
+                    <div class="input-group">
+                        <span class="input-group-addon">Give Rating</span>
+                        <div class='col-md-4' style="border:1px solid #c0c0c0;">
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1">1 star</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">One-line Summary</span>
+                        <%= text_field_tag :summary, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Pro</span>
+                        <%= text_field_tag :pros, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Con</span>
+                        <%= text_field_tag :cons, nil, class: "form-control", :style => "background-color: #FFFFFF;" %>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Review</span>
+                        <div class="span6">
+                            <textarea id="review_content" rows="5" style="width: 100%; border: 1px solid #ccc; padding: 4px;"></textarea>
+                        </div>
+                    </div>       
+                    <div class="panel-footer">
+                        <a id="submit_review" class="btn btn-lg btn-block btn-primary">RATE THIS WEBSITE</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+       </div>
+    </div>
+</div>
+
+<style type="text/css">
+     .rating {
+    float:left;
+    border:none;
+}
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0, 0, 0, 0);
+}
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+}
+.rating:not(:checked) > label:before {
+    content:'★ ';
+}
+.rating > input:checked ~ label {
+    color: #f70;
+}
+.rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+.rating > input:checked + label:hover, .rating > input:checked + label:hover ~ label, .rating > input:checked ~ label:hover, .rating > input:checked ~ label:hover ~ label, .rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+.rating > label:active {
+    position:relative;
+}
+</style>
+
+<!-- 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+			Property Review
+		</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <center>
+                <h1><small>Change your password</small></h1>
+                <hr class="colorgraph">
+                <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+                    <%= devise_error_messages! %>
+                    <%= f.hidden_field :reset_password_token %>
+                        <%= f.password_field :password,:placeholder => "New Password", class: "form-control" %>
+                        <%= f.password_field :password_confirmation,:placeholder => "Confirm Password", class: "form-control" %>
+                        <hr>
+                        <%= f.submit "Change my password", class: "btn btn-primary pull-right" %><br />
+                <% end %>
+                </center>
+            </div>
+            <div class="col-md-2"></div>
+        </div>		
+    </div>
+</div>
+
+
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+  <div class="panel panel-danger">
+     <div class="panel-heading"><h3 class="text-center">DEV PLAN</h3></div>
+         <div class="panel-body text-center">
+            <p class="lead" style="font-size:40px"><strong>$10 / month</strong></p>
+        </div>
+                       <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                        </ul>
+    <div class="panel-footer">
+        <a class="btn btn-lg btn-block btn-danger" href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">BUY NOW!</a>
+    </div>
+ </div>
+</div>
+
+<div class="col-md-4">
+  <div class="panel panel-info">
+     <div class="panel-heading"><h3 class="text-center">PRO PLAN</h3></div>
+         <div class="panel-body text-center">
+            <p class="lead" style="font-size:40px"><strong>$10 / month</strong></p>
+        </div>
+                       <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                        </ul>
+    <div class="panel-footer">
+        <a class="btn btn-lg btn-block btn-danger" href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">BUY NOW!</a>
+    </div>
+ </div>
+</div>
+
+   <div class="col-md-4">
+  <div class="panel panel-success">
+    <div class="panel-heading"><h3 class="text-center">FREE PLAN</h3></div>
+         <div class="panel-body text-center">
+            <p class="lead" style="font-size:40px"><strong>$10 / month</strong></p>
+        </div>
+                       <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Personal use</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> Unlimited projects</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                        </ul>
+    <div class="panel-footer">
+        <a class="btn btn-lg btn-block btn-danger" href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">BUY NOW!</a>
+    </div>
+ </div>
+
+  </div>
+
+  </div>
+</div>

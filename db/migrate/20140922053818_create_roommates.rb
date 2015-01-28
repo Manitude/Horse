@@ -9,7 +9,9 @@ class CreateRoommates < ActiveRecord::Migration
       t.string :ifsc
       t.string :email_id
       t.boolean :primary_tenant
-
+      t.datetime :payment_due_date
+      t.datetime :payment_done_at
+      
       t.timestamps
     end
   end

@@ -3,92 +3,79 @@
     <li>Roommate Info</li>
     <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
 </ol>
+<div class="alert alert-info" role="alert" id="invitation_alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Congratulations!</strong>An invitation has been send to your roommate to join us!'
+</div>
+<div class="alert alert-info" role="alert" id="request_alert" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Great!</strong>Now we wait for them to confirm this request.
+</div>
+<div class="alert alert-info" role="alert" id="fill_information" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Oops!</strong> Kindly complete your profile before adding a roommate. <%= link_to "Click me!", register_tenant_path,:class => "btn btn-primary btn-xs", :method => :get %>
+</div>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-			Roommate Information 
+			Roommate Information
 		</h4>
     </div>
     <div class="panel-body">
-		<div class="table-responsive">
-        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
-            <thead>
-              <tr>
-                <th style="width:5%">No.</th>
-                <th style="width:30%">Name</th>
-                <th style="width:20%" class="hidden-phone">Contact</th>
-                <th style="width:15%" class="hidden-phone">Bank Detail</th>
-                <th style="width:10%" class="hidden-phone">email ID</th>
-                <th style="width:10%" class="hidden-phone"><span data-toggle="tooltip" data-placement="top" title="Status of rent paid for the current month!">Rent Status</span></th>
-                <th style="width:10%" class="hidden-phone" data-toggle="tooltip" data-placement="top" title="You may choose to edit/delete a roommate!">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @roommate_data.each do |data| %>
-                    <tr>
-                    <td style="text-align:center;">1</td>
-                    <td><% data[:name] %></td>
-                    <td style="text-align:center;"><% data[:contact_no] %></td>
-                    <td style="text-align:center;"><% data[:bank_account_number] %></td>
-                    <td style="text-align:center;"><% data[:email_id] %></td>
-                    <td class="hidden-phone">
-                      <span class="label label label-info">New</span>
-                    </td>
-                    <td class="hidden-phone">
-                      <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-xs dropdown-toggle" data-original-title="" title="">
-                        Action 
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu pull-right">
-                        <li>
-                          <a href="#">Pay their rent</a>
-                        </li>
-                        <li>
-                          <a href="#">Edit</a>
-                        </li>
-                        <li>
-                          <a href="#">Delete</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-        </table>
-          <div class="form-group">
-            <!-- Button trigger modal -->
-            <button class="btn btn-warning pull-right" data-toggle="tooltip" data-placement="bottom" title="Using this bla bla!">
+      <table data-toggle="table" data-url= "roommate_data" data-height="299" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" class="table table-condensed table-striped table-bordered table-hover no-margin">
+        <thead>
+          <tr>
+              <th data-field="name" data-align="right" style="width:5%;">Name</th>
+              <th data-field="contact_no" data-align="center">Contact</th>
+              <th data-field="bank_account_number" data-align="left">Bank Detail</th>
+              <th data-field="email_id" data-align="left">Email ID</th>
+              <th data-field="rent_paid_for" data-align="left" data-formatter="rentStatusFormatter">Rent Status</th>
+              <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+          </tr>
+        </thead>
+      </table><br />
+      <div class="form-group">
+          <!-- Button trigger modal -->
+          <div><button class="btn btn-primary pull-right" data-toggle="tooltip" data-placement="bottom" title="Cick this to pay on behalf of your roommates">
               Pay for all
-            </button>
-            <button class="btn btn-warning pull-right" data-toggle="modal" data-target="#myModal">
+            </button></div>
+            <div><button class="btn btn-warning pull-left" data-toggle="modal" data-target="#myModal">
               Add a roommate
-            </button>
+            </button></div>
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add a roommate</h4>
+                    <button type="button" id= 'modal_close' class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add a roommate!</h4>
                   </div>
                   <div class="modal-body">
-                    <%= form_for :roommate_details, :html => {:id => "roommate_detail_id"}, :url => create_roommate_path(:format => :js) do |f| %>
-                          <%= f.text_field :name, :autofocus => true,:placeholder => "Roommate's name", class: "form-control" %>
-                          <%= f.text_field :email_id,:placeholder => "Roommate's email id", class: "form-control" %>
-                  </div>
-                  <hr>
-                  <div class="modal-footer">
-                    <%= f.submit "Save", :id => "save_roommate_details", class: "btn btn-primary btn-lg btn-block" %>
-                    <br />
-                    <% end %>
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                          <div class="input-group">
+                            <input id="search_email_id" type="text" class="form-control" placeholder="Roommate's email id" autofocus>
+                            <span class="input-group-btn">
+                              <button id="add_roommate" class="btn btn-primary btn" type="button">Add</button>
+                            </span>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-3"></div>
+                    </div><br /><!-- /.row -->
+                    <div class="alert alert-danger" role="alert" id="same_id_alert" style="display:none;">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      Oops, this email ID belongs to you.<strong> Please enter a valid email Id of your roommate!</strong>
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="null_id_alert" style="display:none;">
+                      <button type="button" class="close" data-dismiss="alert">×</button>
+                      <strong> Please enter a valid email Id of your roommate!</strong>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="clearfix"></div>
-          </div>
         </div>					
     </div>
 </div>

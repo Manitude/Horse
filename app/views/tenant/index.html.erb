@@ -13,95 +13,168 @@
         <li>Pay Now</li>
         <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
 </ol>
+<% if @host %>
+  <div id="host_id" style="display:none;"><%= @host[:id] %></div>
+  <div class="alert alert-success" role="alert" id="invitation_alert">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <p><strong> Notification</strong>: <strong><%= @host[:sender_rm_list] %></strong> wants to add you as their roommate!</p><br />
+      <p><strong>Important:</strong> On accepting this request your Rent related details would be updated with following information:</p>
+      <p>Landlord's Name: <strong><%= @host[:landlord_name] %></strong></p>
+      <p>Landlord's A/C No: <strong><%= @host[:landlord_ac_no] %></strong></p>
+      <p>Landlord's IFSC: <strong><%= @host[:landlord_ifsc] %></strong></p>
+      <p>Payment Due Date: <strong><%= @host[:payment_date]%></strong><sup>th</sup> of every month</p>
+      <p>Total rent to be paid: <strong><%= @host[:rent] %></strong></p>
+      <% unless @host[:my_rm_list] %><p>Your share : <strong><%= @host[:my_solo_share] %></strong></p><br /><% end %>
+      <div class="row">
+        <% if @host[:my_rm_list] %>
+          <br />
+          <div>
+            <p>Would you like to join <strong><%= @host[:sender_rm_list]%></strong> along with your current group of <strong><%= @host[:my_rm_list]%></strong></p>
+            <div class="col-md-4">Your share: <strong><%= @host[:my_group_share] %></strong></div>
+            <div class="col-md-8"><button type="button" class="btn btn-success btn-xs" id="solo_accepted">Join with current group</button></div>
+          </div>
+          <br />
+          <div>
+            <p>Would you like to quit your current group of <strong><%= @host[:my_rm_list]%></strong> and join <strong><%= @host[:sender_rm_list]%></strong></p>
+            <div class="col-md-4">Your share : <strong><%= @host[:my_solo_share] %></strong></div>
+            <div class="col-md-8"><button type="button" class="btn btn-success btn-xs" id="solo_accepted">Quit current group and Accept</button></div>
+          </div>
+          <br />
+          <div>
+            <div class="col-md-2">Decline?</div>
+            <div class="col-md-10">
+              <button type="button" class="btn btn-success btn-xs" id="roommate_denied">Decline</button>
+              <button type="button" class="btn btn-success btn-xs" id="roommate_remind_me_later">Remind me later</button>
+            </div>
+          </div>
+        <% else %>
+          <div class="col-md-2">Do you accept?</div>
+          <div class="col-md-10">
+            <button type="button" class="btn btn-success btn-xs" id="roommate_accepted">Accept</button>
+            <button type="button" class="btn btn-success btn-xs" id="roommate_denied">Decline</button>
+            <button type="button" class="btn btn-success btn-xs" id="roommate_remind_me_later">Remind me later</button>
+          </div>
+        <% end %>
+      </div>
+  </div>
+  <div class="alert alert-info" role="alert" id="invitation_acceptance" style="display:none;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong> Congratulations!</strong> You are now roommate(s) with  <%= @host[:sender_rm_list] %>. Your rent amount, landlord details and rent payment date has been updated accordingly!
+  </div>
+  <div class="alert alert-info" role="alert" id="invitation_denial" style="display:none;">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+       Request from <%= @host[:id] %> has been declined by you!
+  </div>
+<% end %>
 <center><h3 id="sec0">A smart way to pay your rent is here!</h3></center>
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="input-group">
-                  <span class="input-group-addon"><b><span class="WebRupee">&#x20B9;</span></b></span>
-                  <input type="text" value="20,000" class="form-control" placeholder="Rent Amount">
+        <% if @data %>
+          <%= form_for :payment_details, :html => {:id => "make_payment_id"}, :url => make_payment_path do |f| %>
+            <div class="panel-heading" style="background-color: #EEEEEE">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon"><b><span class="WebRupee">&#x20B9;</span></b></span>
+                    <%= f.text_field :rent_amount, :autofocus => true , :value => @data[:rent_amount],:placeholder => "Rent Amount", :data => {:toggle => 'tooltip', :placement => 'bottom'}, :title => "Enter your rent amount" , class:"form-control" %>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="input-group">
-                  <span class="input-group-addon">Due Date: </span>
-                  <input type="text" class="form-control" disabled="disabled"><br />
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">Due Date: </span>
+                    <%= f.text_field :rent_due_date, :value => @data[:rent_due_date], class:"form-control", :style => "background-color: #{@data[:color_class_code]}; font-weight: bold; font-size: 90%; font-weight: bold; color: #ffffff;",:readonly => true%><br />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <%= link_to "Edit", register_tenant_path,:class => "btn btn-primary pull-right", :method => :get %><br />
                 </div>
               </div>
             </div>
-          </div>
+            <div class="panel-body">
+                <div class="input-group">
+                  <span class="input-group-addon">Landlord's Name</span>
+                  <input type="text" value='<%= @data[:landlord_name] %>' class="form-control" style="background-color: #FFFFFF; color: #000000;" disabled>
+                </div>
+                <div class="input-group">
+                   <span class="input-group-addon">Account Number</span>
+                   <input type="text" value='<%= @data[:landlord_ac_no] %>' class="form-control" style="background-color: #FFFFFF; color: #000000;" disabled>
+                </div>
+                <div class="row"><div class="col-md-4"><div class="input-group">
+                  <span class="input-group-addon">IFSC</span>
+                  <input type="text" value='<%= @data[:landlord_ifsc] %>' class="form-control" style="background-color: #FFFFFF; color: #000000;" disabled>
+                </div></div></div><br/ >
+                <%= f.submit "Pay Now", :id => "pay_now", class: "btn btn-lg btn-primary btn-block" %>
+            </div><br/ >
+          <% end %>
+        <% else %>
           <div class="panel-body">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab1" data-toggle="tab">Credit Card</a></li>
-              <li><a href="#tab2" data-toggle="tab">Debit Card</a></li>
-              <li><a href="#tab3" data-toggle="tab">Net Banking</a></li>
-            </ul><br />
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab1">
-                  <div class="col-md-12">
-                    <%= form_for :property, :html => {:id => "property_form_id"}, :url => pay_rent_through_credit_path(:format => :js) do |f| %>
-                      <div class=".col-xs-6 .col-sm-4">
-                        Cardholder's Name :<%= f.text_field :cardholder_name, :placeholder => "Eg. Sachin Tendulkar"%>
-                      </div>
-                      <div class=".col-xs-6 .col-sm-4">
-                        Card Number :   <%= f.text_field :card_number, :placeholder => "Eg. 1111222233334444"%>
-                      </div>
-                      <div class=".col-xs-6 .col-sm-4">
-                        Valid till: <%= f.text_field :valid_till, :placeholder => "Eg. 03/2014"%>&nbsp;&nbsp;
-                        CVC:<%= f.text_field :cvc, :placeholder => "Eg. 123"%>
-                      </div>
-                      Remember me: <%= f.check_box :remember %><!--,:checked => @topic.selected %> --><br>
-                      <%= f.submit 'Pay Now', :name => "pay_now" %>
-                    <% end %>
-                  </div>
+            <h4 id="sec0">Do you already have a roommate registered with us?<small> Try our new search feature!</small></h4>
+            <div class="input-group">
+              <input id="search_email_id" type="text" class="form-control" placeholder="Enter your roommate's email id">
+              <span class="input-group-btn">
+                <button id="search_roommate" class="btn btn-primary btn" type="button">Search</button>
+              </span>
+            </div>
+            <hr>
+            <h2 id="sec0"><center><small> Let's get some of your details to get started!</small></center></h2>
+            <%= form_for :bank_and_payment_details, :html => {:id => "landlord_bank_detail_id"}, :url => save_and_pay_path do |f| %>
+              <div class="input-group">
+                <span class="input-group-addon">Your Name</span>
+                <%= f.text_field :payer_name, :autofocus => true,:placeholder => "Your name", class:"form-control" %>
               </div>
-              <div class="tab-pane" id="tab2">
-                <div class="col-xs-8">
-                  <div class="col-md-12">
-                    <%= form_for :property, :html => {:id => "property_form_id"}, :url => pay_rent_through_debit_path(:format => :js) do |f| %>
-                      Cardholder's Name: <%= f.text_field :cardholder_name, :placeholder => "Eg. Sachin Tendulkar"%><br />
-                      Card Number: <%= f.text_field :card_number, :placeholder => "Eg. 1111222233334444"%><br />
-                      Valid till: <%= f.text_field :valid_till, :placeholder => "Eg. 03/2014"%>
-                      CVC: <%= f.text_field :cvc, :placeholder => "Eg. 123"%><br />
-                      Remember me: <%= f.check_box :remember %><!--,:checked => @topic.selected %> --><br>
-                      <%= f.submit 'Pay Now', :name => "pay_now" %>
-                    <% end %>
-                <!--    <form role="form">
-                      <div class="input-group">
-                        <span class="input-group-addon">Cardholder's Name</span>
-                        <input type="text" class="form-control">
-                      </div><br/ >
-                      <div class="input-group">
-                        <span class="input-group-addon">Card Number</span>
-                        <input type="text" class="form-control" placeholder="Enter your 16 digit card number">
-                      </div><br/ >
-                      <div class="row">
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <span class="input-group-addon">Valid till</span>
-                            <input type="text" class="form-control" placeholder="MM">
-                            <span class="input-group-addon"> </span>
-                            <input type="text" class="form-control" placeholder="YYYY">
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="input-group">
-                            <span class="input-group-addon">CVC</span>
-                            <input type="text" class="form-control" placeholder="Ex 331">
-                          </div>
-                        </div>
-                      </div><br/ >
-                      <button type="submit" class="btn btn-primary">Pay Now</button>
-                    </form> -->
-                  </div>
+              <div class="input-group">
+                <span class="input-group-addon">Mobile Number</span>
+                <%= f.text_field :payer_contact, :autofocus => true,:placeholder => "Your mobile number", class:"form-control" %>
+              </div><br />
+              <div class="input-group">
+                <span class="input-group-addon">Landlord's Name</span>
+                <%= f.text_field :payee_name, :placeholder => "Landlord's name", class:"form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Landlord's Contact No</span>
+                <%= f.text_field :payee_contact, :placeholder => "Landlord's mobile number", class:"form-control" %>
+              </div>
+              <div class="input-group">
+                 <span class="input-group-addon">Account Number</span>
+                <%= f.text_field :payee_account_number, :placeholder => "Landlord's 16-digit account number", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                   <span class="input-group-addon">Confirm A/c Number</span>
+                   <%= f.text_field :payee_account_number, :placeholder => "Confirm landlord's 16-digit account number", class: "form-control" %>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">IFSC</span>
+                    <%= f.text_field :payee_ifsc_code, :placeholder => "IFSC Code", class: "form-control col-md-4" %>
+                  </div><br />
                 </div>
               </div>
-              <div class="tab-pane" id="tab3">Content here 3...</div>
-            </div>
-          </div>
-      </div>
-    </div> 
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">Rent</span>
+                    <%= f.text_field :rent_amount, :autofocus => true,:placeholder => "Rent amount", class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <span class="input-group-addon">Deposit</span>
+                    <%= f.text_field :security_deposit, :autofocus => true,:placeholder => "Security deposit", class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group">  
+                    <span class="input-group-addon">Rent Date</span>
+                    <%= f.select 'rent_due_date', options_for_rent_payable_date, {prompt: "-- Select a date --"}, {:id => "rent_due_date",:class => 'form-control'} %>
+                  </div>
+                </div>
+              </div><br/ >
+              <%= f.submit "Save", :id => "register", class: "btn btn-lg btn-primary btn-block" %>
+            <% end %>
+          </div><br/ >
+          <% end %>
+        </div>
+    </div>
   </div>

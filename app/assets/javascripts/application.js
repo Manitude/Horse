@@ -1,95 +1,79 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
-//
-//= require jquery_ujs
-//= require jquery
-//= require jquery.ui.all
-//= require_tree .
 
-$(document).ready(function() {
-	$('#furnish_detail label').css("color", "darkgrey");
-	$('#furnish_detail select').attr('disabled', true);
+
+$("#skip").click(function(){
+	goToProperty();
 });
 
-require.config({
-          paths: {
-			  'fuelux': 'http://www.fuelcdn.com/fuelux/2.6.0/',
-              'jquery': 'http://code.jquery.com/jquery-1.11.0.min'
-			    }
-    });
-require(['fuelux/wizard']);
 
-$('#furnishing').on('change', function() {
-	if((this.value == "Fully-furnished") || this.value == "Semi-furnished"){
-		$('#furnish_detail label').css("color", "black");
-		$('#furnish_detail select').attr('disabled', false);
-	}
-	else{
-		$('#furnish_detail label').css("color", "darkgrey");
-		$('#furnish_detail select').attr('disabled', true);
-	}
-});
-
-$('#btnWizardSkip').on('click', function() {
-  $('#next').trigger("click");
-});
 $('#MyWizard').on('stepclick', function(e, data) {
   console.log('step' + data.step + ' clicked');
   if(data.step===1) {
   }
 });
 
-$('form#landlord_bank_detail_id').submit(function() {
-    var bank_detail = $(this).serialize();
+$('#bank_details_next').click(function(e) {
+	var detail = $('form#landlord_bank_detail_id').serialize();
+	e.preventDefault();
     $.ajax({
-        url: $(this).attr('action'), //sumbits it to the given url of the form
-        data: { bank_details:  bank_detail
-        },
-        dataType: "JSON", // you want a difference between normal and ajax-calls, and json is standard
-	    success: function(json){
-	    	alert("in 2");
-	    	$('#next').trigger("click");
+        url: $('form#landlord_bank_detail_id').attr('action'), //sumbits it to the given url of the form
+        data: detail,
+        method: 'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "html", // you want a difference between normal and ajax-calls, and json is standard
+	    
+	    success: function(){
+	    	goToUser();
 	    },
-	    failure: function(error){
-	        console.log(error);
-	        alert("failure:::::Something went wrong, Please report this problem.");
+	    error: function(){
+	        // console.log(error);
+	         alert("Oops! there was an error, Please reload the page and try again.");
 	    },
-	    error: function(error){
-	        console.log(error);
-	        alert("error::::::Something went wrong, Please report this problem.");
+	    failure: function(){
+	        // console.log(error);
+	        alert("Something went wrong, Please report this problem.");
+	    }
+	    
+    });
+//    return false; // prevents normal behaviour
+});
+
+$('#user_details_next').click(function(e) {
+	var detail = $('form#user_detail_id').serialize();
+	e.preventDefault();
+    $.ajax({
+        url: $('form#user_detail_id').attr('action'), //submits it to the given url of the form
+        data: detail,
+        method: 'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType: "html", // you want a difference between normal and ajax-calls, and json is standard
+        
+	    success: function(){
+    		goToProperty();
+	    },
+	    failure: function(){
+	        alert("Something went wrong, Please report this problem.");
+	    },
+	    error: function(){
+	        alert("Oops! there was an error, Please reload the page and try again.");
 	    }
     });
 //    return false; // prevents normal behaviour
 });
 
-$('form#user_detail_id').submit(function() {
-	alert("this is user_detail_id!!");
-    var user_details = $(this).serialize();
-    $.ajax({
-        url: $(this).attr('action'), //sumbits it to the given url of the form
-        data: user_details,
-        dataType: "JSON", // you want a difference between normal and ajax-calls, and json is standard
-	    success: function(json){
-	    	alert("in 2");
-	    	$('#next').trigger("click");
-	    },
-	    failure: function(error){
-	        console.log(error);
-	        alert("failur:::::Something went wrong, Please report this problem.");
-	    },
-	    error: function(error){
-	        console.log(error);
-	        alert("error::::::Something went wrong, Please report this problem.");
-	    }
-    });
-//    return false; // prevents normal behaviour
-});
+function goToUser() {
+    $('*[data-target="#step1"]').removeClass('active');
+	$('*[data-target="#step1"]').addClass('badge');
+	$('*[data-target="#step2"]').removeClass('badge');
+	$('*[data-target="#step2"]').addClass('active');
+    $('#step1').hide();
+    $('#step2').show();
+}
+
+function goToProperty() {
+	$('*[data-target="#step2"]').removeClass('active');
+	$('*[data-target="#step2"]').addClass('badge');
+	$('*[data-target="#step3"]').removeClass('badge');
+	$('*[data-target="#step3"]').addClass('active');
+    $('#step2').hide();
+    $('#step3').show();
+}

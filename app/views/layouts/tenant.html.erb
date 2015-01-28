@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>RentBazaar</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'bootstrap','tenant','facebox','bootstrap-table' %>
 </head>
 <body class="grey">
 	<div class="navbar navbar-inverse navbar-static-top">
@@ -30,20 +32,20 @@
 		                <li><%= link_to "Roommate Info", tenant_roommate_path, {:class=> "list-group-item list-group-item-info"}, :data => { :toggle => 'collapse', :parent => '#sidebar' }%></li>
 		                <!-- <li><%= link_to "Dashboard", tenant_dashboard_path, {:class=> "list-group-item list-group-item-info"}, :data => { :toggle => 'collapse', :parent => '#sidebar' }%></li>	-->
 		                <li><%= link_to "Payment history", tenant_payment_history_path, {:class=> "list-group-item list-group-item-info"}%></li>
-		                <li><%= link_to "Issue(s)", tenant_issue_path, {:class=> "list-group-item list-group-item-info"}%></li>
+		                <!-- <li><%= link_to "Issue(s)", tenant_issue_path, {:class=> "list-group-item list-group-item-info"}%></li> -->
 		                <a href="#profile_list" class="list-group-item list-group-item-info" data-toggle="collapse" data-parent="#sidebar">Profile</a>
 					    <div id="profile_list">
 					      <%= link_to "&nbsp;&nbsp;&nbsp;User Profile".html_safe, tenant_user_profile_path, {:class=> "list-group-item"}%>
 					      <%= link_to "&nbsp;&nbsp;&nbsp;Flat Profile".html_safe, tenant_property_profile_path, {:class=> "list-group-item"}%>
 					      <%= link_to "&nbsp;&nbsp;&nbsp;Payee Bank Detail".html_safe, tenant_bank_details_path, {:class=> "list-group-item"}%>
-					      <a href="#" class="list-group-item">&nbsp;&nbsp;&nbsp;Rent terms</a>
-					      <a href="#" class="list-group-item">&nbsp;&nbsp;&nbsp;Review</a>
 					    </div>
+					    <li><%= link_to "HRA receipt", rent_receipt_path, {:class=> "list-group-item list-group-item-info"}%></li>
+					    <li><%= link_to "Review", tenant_review_path, {:class=> "list-group-item list-group-item-info"}%></li>
 		                <li><%= link_to "Setting", tenant_setting_path, {:class=> "list-group-item list-group-item-info"}%></li>
 		            </ul>
 		        </div>
 		    </div>
-      		<div class="col-md-8">
+      		<div class="col-md-9">
       			<%= yield %> 
       		</div>
 		</div>
@@ -56,8 +58,6 @@
     </footer>
     <!-- FOOTER: end -->
   <!--	<script src="http://cdn.webrupee.com/js" type="text/javascript"></script> -->
-  <%= stylesheet_link_tag 'bootstrap.min','bootstrap-theme.min','tenant','facebox' %>
-  <%= javascript_include_tag 'jquery','bootstrap.min','tenant','facebox' %>
-  <%= csrf_meta_tags %>
+  <%= javascript_include_tag 'jquery','bootstrap.min','tenant','facebox','bootstrap-table' %>
 </body>
 </html>

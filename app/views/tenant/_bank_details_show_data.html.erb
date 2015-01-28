@@ -1,0 +1,22 @@
+<div class="col-md-10" id="details">
+              <div class="input-group">
+                <span class="input-group-addon">Landlord's Name</span>
+                <%= text_field_tag :payee_name, @data["payee_name"], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Account Number</span>
+                <%= text_field_tag :payee_account_number, @data["payee_account_number"], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">IFSC Code</span>
+                <%= text_field_tag :payee_ifsc_code, @data["payee_ifsc_code"], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Mobile Number</span>
+                <%= text_field_tag :payee_contact_number, @data["payee_contact_number"], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Email ID</span>
+                <%= text_field_tag :payee_email, @data["payee_email"], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+        </div>

@@ -11,50 +11,60 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140922053818) do
+ActiveRecord::Schema.define(:version => 20150117085959) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email",                                              :null => false
-    t.integer  "contact_number"
+    t.string   "name"
+    t.string   "email"
+    t.string   "contact_number"
     t.string   "pan"
     t.datetime "birth_date"
     t.string   "user_type"
-    t.integer  "pin_code",           :limit => 8
+    t.string   "pin_code"
     t.string   "photo_file_name"
     t.string   "gender"
-    t.integer  "emergency_contact"
-    t.boolean  "pet",                             :default => false
-    t.boolean  "smoking_drinking",                :default => false
+    t.string   "emergency_contact"
+    t.boolean  "pet",                :default => false
+    t.boolean  "smoking_drinking",   :default => false
     t.string   "eating_preferences"
     t.text     "review"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "account_id",                            :null => false
+    t.integer  "rating"
+  end
+
+  create_table "invite_roommates", :force => true do |t|
+    t.string   "sender_email",    :null => false
+    t.string   "invitee_email",   :null => false
+    t.boolean  "acceptance"
+    t.datetime "acceptance_date"
+    t.string   "account_id",      :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "issues", :force => true do |t|
-    t.string   "tenant_email",   :null => false
-    t.string   "landlord_email"
-    t.string   "property_id",    :null => false
     t.datetime "reported_by"
     t.datetime "reporting_date"
     t.datetime "resolved_date"
     t.string   "status"
-    t.integer  "account_id",     :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "account_id",                     :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "severity",       :limit => 60
+    t.string   "description",    :limit => 1000
   end
 
   create_table "payee_bank_details", :force => true do |t|
-    t.string   "payer_email",          :null => false
+    t.string   "payee_email"
     t.string   "payee_name",           :null => false
     t.string   "payee_account_number", :null => false
-    t.integer  "payee_ifsc_code"
-    t.integer  "payee_contact_number"
-    t.integer  "account_id",           :null => false
+    t.string   "payee_ifsc_code"
+    t.string   "payee_contact_number"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "account_id"
   end
 
   create_table "payer_bank_details", :force => true do |t|
@@ -63,32 +73,35 @@ ActiveRecord::Schema.define(:version => 20140922053818) do
     t.string   "card_number"
     t.string   "valid_till"
     t.string   "card_type"
-    t.integer  "account_id",      :null => false
+    t.string   "account_id",      :null => false
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
   create_table "payment_histories", :force => true do |t|
-    t.string   "tenant_email",                            :null => false
-    t.string   "landlord_email"
+    t.string   "landlord_name"
     t.string   "property_id",                             :null => false
     t.string   "amount",                                  :null => false
     t.string   "purpose",             :default => "rent", :null => false
-    t.datetime "payment_due_date",                        :null => false
-    t.datetime "payment_done_at",                         :null => false
+    t.datetime "payment_done_at"
     t.string   "payment_mode",                            :null => false
-    t.string   "payment_received_at"
-    t.integer  "account_id",                              :null => false
+    t.datetime "payment_received_at"
+    t.string   "account_id",                              :null => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.boolean  "late"
+    t.boolean  "pending"
+    t.boolean  "successful"
+    t.string   "postal_address"
+    t.string   "landlord_PAN"
   end
 
   create_table "properties", :force => true do |t|
     t.string   "owner_email"
-    t.integer  "owner_contact"
+    t.string   "owner_contact"
     t.string   "tenant_email"
     t.text     "description"
-    t.integer  "pin_code"
+    t.string   "pin_code"
     t.text     "postal_address"
     t.string   "landmark"
     t.string   "area"
@@ -119,24 +132,36 @@ ActiveRecord::Schema.define(:version => 20140922053818) do
     t.boolean  "microwave"
     t.string   "album_folder_name"
     t.text     "rent_agreement_terms"
-    t.datetime "rent_due_date"
+    t.integer  "rent_due_date"
     t.text     "notes"
     t.text     "review"
-    t.integer  "account_id",           :null => false
+    t.string   "account_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "rating"
+  end
+
+  create_table "reviews", :force => true do |t|
+    t.text     "review"
+    t.string   "rating"
+    t.integer  "for_property"
+    t.string   "account_id",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "for_account"
   end
 
   create_table "roommates", :force => true do |t|
-    t.integer  "account_id",          :null => false
-    t.string   "name",                :null => false
-    t.integer  "contact_no"
+    t.integer  "property_id"
+    t.string   "name"
+    t.string   "contact_no"
     t.string   "bank_account_number"
     t.string   "ifsc"
     t.string   "email_id"
     t.boolean  "primary_tenant"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.datetime "rent_paid_for"
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,129 @@
+<div class="col-md-10" id="details">
+        <div id="property_detail">
+              <div class="input-group">
+                <span class="input-group-addon">Description</span>
+                <%= text_field_tag :description, @data[:description], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Rent amount</span>
+                <%= text_field_tag :rent, @data[:rent], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Deposit amount</span>
+                <%= text_field_tag :deposit, @data[:deposit], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Locality</span>
+                <%= text_field_tag :area, @data[:area], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Pin Code</span>
+                <%= text_field_tag :pin_code, @data[:pin_code], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Postal Address</span>
+                <div class="span6">
+                  <textarea id="review_content" rows="5" style="width: 100%; border: 1px solid #ccc; padding: 4px;"></textarea>
+                </div>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Landmark</span>
+                <%= text_field_tag :landmark, @data[:landmark], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">City</span>
+                <%= text_field_tag :city, @data[:city], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">State</span>
+                <%= text_field_tag :state, @data[:state], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Built up area</span>
+                <%= text_field_tag :built_up_area, @data[:built_up_area], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+                <span class="input-group-addon"><small>sq. feet</small></span>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Lease Type</span>
+                <%= text_field_tag :lease_type, @data[:lease_type], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Water Supply</span>
+                <%= text_field_tag :water_supply_type, @data[:water_supply_type], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Direction facing</span>
+                <%= text_field_tag :direction_facing, @data[:direction_facing], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Furnishing</span>
+                <%= text_field_tag :furnishing, @data[:furnishing], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+        </div>
+        <div id="furnish_detail">
+              <div class="input-group">
+                <span class="input-group-addon">No. of Bedroom</span>
+                <%= text_field_tag :bedroom, @data[:bedroom], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Bathroom</span>
+                <%= text_field_tag :bathroom, @data[:bathroom], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Wardrobe</span>
+                <%= text_field_tag :wardrobe, @data[:wardrobe], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">AC</span>
+                <%= text_field_tag :ac, @data[:ac], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">TV</span>
+                <%= text_field_tag :tv, @data[:tv], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Dining Table</span>
+                <%= text_field_tag :dining_table, @data[:dining_table], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Parking</span>
+                <%= text_field_tag :parking, @data[:parking], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Refrigerator</span>
+                <%= text_field_tag :refrigerator, @data[:refrigerator], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Geyser</span>
+                <%= text_field_tag :geyser, @data[:geyser], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Sofa</span>
+                <%= text_field_tag :sofa, @data[:sofa], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Gas pipeline</span>
+                <%= text_field_tag :gas_pipeline, @data[:gas_pipeline], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Gymnasium</span>
+                <%= text_field_tag :gym, @data[:gym], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Swimming pool</span>
+                <%= text_field_tag :swimming_pool, @data[:swimming_pool], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Lift</span>
+                <%= text_field_tag :lift, @data[:lift], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Washing Machine</span>
+                <%= text_field_tag :washing_machine, @data[:washing_machine], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Microwave</span>
+                <%= text_field_tag :microwave, @data[:microwave], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+              </div>
+        </div>
+    </div>

@@ -3,62 +3,25 @@
         <li>User Profile</li>
         <li class="pull-right"><a onclick="hideBreadcrumb()">Hide me</a></li>
 </ol>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4 class="panel-title">
+        <div class="row">
+          <div class="col-md-8">
+          <h4 class="panel-title">
             User Profile
-        </h4>
+          </h4>
+        </div>
+        <div class="col-md-4">
+          <a id="edit_detail" class="btn btn-primary pull-right">Edit</a>
+        </div>
+        </div>
     </div>
     <div class="panel-body">
-        <%= form_for :property, :html => {:id => "property_form_id"}, :url => save_user_info_path(:format => :js) do |f| %>
-            <div class="row">
-                <div class="col-md-8 personal-info">
-                    <div class="alert alert-info alert-dismissable" style="display: none;"> <a class="panel-close close" data-dismiss="alert">×</a>  <i class="fa fa-coffee"></i>This is an <strong class="">.alert</strong>. Use this to show important messages to the user.</div>
-                    <h3 class="">Personal info</h3>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">First name:</label>
-                            <%= f.text_field :first_name, :class => "col-lg-6", :placeholder => "Eg. Sachin"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">Last name:</label>
-                            <%= f.text_field :last_name, :class => "col-lg-6", :placeholder => "Eg. Tendulkar"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">Email:</label>
-                            <%= f.text_field :email, :class => "col-lg-6", :placeholder => "Eg. sachin@gmail.com"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">Phone:</label>
-                            <%= f.text_field :phone, :class => "col-lg-6", :placeholder => "Eg. 1234512345"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">Emergency Phone(optional):</label>
-                            <%= f.text_field :emergency_phone, :class => "col-lg-6", :placeholder => "Eg. 1234512345"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-7 control-label">Do you own pets(optional):</label>
-                            <%= f.text_field :pets, :class => "col-lg-5", :placeholder => "Eg. Yes"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-7 control-label">Do you Smoke/Drink(optional):</label>
-                            <%= f.text_field :smoke_drink, :class => "col-lg-5", :placeholder => "Eg. Yes"%>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-7 control-label">Eating preferences(optional):</label>
-                            <%= f.text_field :eating_preferences, :class => "col-lg-5", :placeholder => "Eg. Vegetarian"%>
-                        </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center">
-                        <img src="//placehold.it/100" class="avatar img-thumbnail" alt="avatar">
-                        <h6 class="">Upload your photo!</h6>
-                        <input class="form-control" type="file">
-                    </div>
-                </div>
-            </div> 
-            <div style="float:right;"><%= f.submit 'Save', :name => "save_user_profile" %></div>
-        <% end %>
+      <% if @data %>
+        <%= render :partial => "user_profile_show_data" %>
+        <%= render :partial => "user_profile_edit_data" %>
+      <% else %>
+        <%= render :partial => "user_profile_edit_data" %>
+      <% end %>
     </div>
 </div>

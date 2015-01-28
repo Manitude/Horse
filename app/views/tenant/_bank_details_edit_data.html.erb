@@ -1,0 +1,32 @@
+<div class="col-md-10" id="edit_details" style="<%if @data%>display:none;<%end%>;">
+        <%= form_for :bank_details, :html => {:id => "landlord_bank_detail_id"}, :url => save_landlord_bank_info_path(:format => :js) do |f| %>
+              <div class="input-group">
+                <span class="input-group-addon">Landlord's Name</span>
+                <%= f.text_field :payee_name, :value => @data.try(:payee_name), :autofocus => true,:placeholder => "Landlord's name", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Account Number</span>
+                <%= f.text_field :payee_account_number, :value => @data.try(:payee_account_number), :placeholder => "Landlord's account number", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Confirm A/c No.</span>
+                <%= f.text_field :payee_account_number, :placeholder => "Confirm landlord's account number", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">IFSC Code</span>
+                <%= f.text_field :payee_ifsc_code, :value => @data.try(:payee_ifsc_code), :placeholder => "IFSC Code", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Mobile Number</span>
+                <%= f.text_field :payee_contact_number, :value => @data.try(:payee_contact_number), :placeholder => "Landlord's mobile number(optional)", class: "form-control" %>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Email ID</span>
+                <%= f.text_field :payee_email, :value => @data.try(:payee_email), :placeholder => "Landlord's email id(optional)", class: "form-control" %>
+              </div>
+              <div class=".col-xs-6 .col-md-4 pull-right">
+                <a id="reset_bank_details" class="btn btn-default">Reset</a>
+                <%= f.submit "Next", :id => "save_bank_details", class: "btn btn-primary" %>
+              </div>
+        <% end %>
+      </div>

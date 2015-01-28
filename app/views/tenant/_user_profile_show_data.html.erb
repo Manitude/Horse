@@ -1,0 +1,22 @@
+<div class="col-md-10" id="details">
+    <div class="input-group">
+      <span class="input-group-addon">Name</span>
+      <%= text_field_tag :name, @data[:name], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Email ID</span>
+      <%= text_field_tag :email, @data[:email], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Contact</span>
+      <%= text_field_tag :phone, @data[:contact_number], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Bank A/c No</span>
+      <%= text_field_tag :bank_account_number, @data[:bank_account_number], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">IFSC</span>
+      <%= text_field_tag :ifsc, @data[:ifsc], class: "form-control",:readonly => true, :style => "background-color: #FFFFFF;" %>
+    </div>
+</div>

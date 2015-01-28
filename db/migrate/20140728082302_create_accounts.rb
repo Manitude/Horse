@@ -17,6 +17,8 @@ class CreateAccounts < ActiveRecord::Migration
       t.boolean :smoking_drinking , :default => false
       t.string :eating_preferences
       t.text :review
+
+      t.integer :account_id, :null => false
       
       t.timestamps
     end

@@ -1,0 +1,49 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+ApplicationController	application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+HomeController	home_controller.rb	/^class HomeController < ApplicationController$/;"	c
+index	home_controller.rb	/^  def index$/;"	f	class:HomeController
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+LandlordController	landlord_controller.rb	/^class LandlordController < ApplicationController$/;"	c
+index	landlord_controller.rb	/^  def index$/;"	f	class:LandlordController
+TenantController	tenant_controller.rb	/^class TenantController < ApplicationController$/;"	c
+bank_details	tenant_controller.rb	/^  def bank_details$/;"	f	class:TenantController
+calculate_rent	tenant_controller.rb	/^  def calculate_rent(total_amount, property_id)$/;"	f
+check_roommate_invitation	tenant_controller.rb	/^  def check_roommate_invitation$/;"	f
+create_an_issue	tenant_controller.rb	/^  def create_an_issue$/;"	f
+create_roommate	tenant_controller.rb	/^  def create_roommate$/;"	f	class:TenantController
+delete_redundant_record	tenant_controller.rb	/^  def delete_redundant_record(host_property_id, user_property_id)$/;"	f
+delete_roommate_details	tenant_controller.rb	/^  def delete_roommate_details$/;"	f
+edit_roommate_details	tenant_controller.rb	/^  def edit_roommate_details$/;"	f
+fetch_rm_list	tenant_controller.rb	/^  def fetch_rm_list(email_id, self_flag = false)$/;"	f
+get_rent_info	tenant_controller.rb	/^  def get_rent_info(property)$/;"	f
+index	tenant_controller.rb	/^  def index$/;"	f	class:TenantController
+initiate_payment	tenant_controller.rb	/^  def initiate_payment(rent,payment_date)$/;"	f
+invite_roommate	tenant_controller.rb	/^  def invite_roommate(email_id)$/;"	f
+issue	tenant_controller.rb	/^  def issue$/;"	f
+make_payment	tenant_controller.rb	/^  def make_payment$/;"	f	class:TenantController
+pay_rent_through_credit	tenant_controller.rb	/^  def pay_rent_through_credit$/;"	f
+pay_rent_through_debit	tenant_controller.rb	/^  def pay_rent_through_debit$/;"	f
+payee_detail	tenant_controller.rb	/^  def payee_detail$/;"	f
+payment_history	tenant_controller.rb	/^  def payment_history$/;"	f	class:TenantController
+ph_data	tenant_controller.rb	/^  def ph_data$/;"	f	class:TenantController
+property_detail	tenant_controller.rb	/^  def property_detail$/;"	f
+property_profile	tenant_controller.rb	/^  def property_profile$/;"	f	class:TenantController
+register_tenant	tenant_controller.rb	/^  def register_tenant$/;"	f	class:TenantController
+register_user	tenant_controller.rb	/^  def register_user$/;"	f	class:TenantController
+rent_receipt	tenant_controller.rb	/^  def rent_receipt$/;"	f	class:TenantController
+report_issue	tenant_controller.rb	/^  def report_issue$/;"	f
+roommate_data	tenant_controller.rb	/^  def roommate_data$/;"	f	class:TenantController
+roommate_request_response	tenant_controller.rb	/^  def roommate_request_response$/;"	f
+save_landlord_bank_info	tenant_controller.rb	/^  def save_landlord_bank_info$/;"	f	class:TenantController
+save_property_details	tenant_controller.rb	/^  def save_property_details$/;"	f	class:TenantController
+save_property_profile	tenant_controller.rb	/^  def save_property_profile$/;"	f
+save_user_info	tenant_controller.rb	/^  def save_user_info$/;"	f	class:TenantController
+save_user_profile	tenant_controller.rb	/^  def save_user_profile$/;"	f
+search_roommate	tenant_controller.rb	/^  def search_roommate$/;"	f	class:TenantController
+submit_review	tenant_controller.rb	/^  def submit_review$/;"	f
+update_payment_history	tenant_controller.rb	/^  def update_payment_history$/;"	f	class:TenantController
+user_profile	tenant_controller.rb	/^  def user_profile$/;"	f	class:TenantController

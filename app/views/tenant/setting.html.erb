@@ -6,12 +6,28 @@
 </ol>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4 class="panel-title">
+        <h3 class="panel-title">
 			My settings
-		</h4>
+		</h3>
     </div>
     <div class="panel-body">
-		Content goes here						
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <center>
+                <h1><small>Change your password</small></h1>
+                <hr class="colorgraph">
+                <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+                    <%= devise_error_messages! %>
+                    <%= f.hidden_field :reset_password_token %>
+                        <%= f.password_field :password,:placeholder => "New Password", class: "form-control" %>
+                        <%= f.password_field :password_confirmation,:placeholder => "Confirm Password", class: "form-control" %>
+                        <hr>
+                        <%= f.submit "Change my password", class: "btn btn-primary pull-right" %><br />
+                <% end %>
+                </center>
+            </div>
+            <div class="col-md-2"></div>
+        </div>		
     </div>
 </div>
-

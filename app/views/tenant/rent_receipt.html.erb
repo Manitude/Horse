@@ -1,0 +1,49 @@
+<!-- <div class="alert alert-info" role="alert" id="rent_success_intimation" >
+    <strong> Congratulations!</strong><div id="alert_content">your rent for <strong><%= Time.now.strftime("%B, %Y") %></strong> has been paid successfully.</div>
+</div> -->
+<% if @data %>
+<div id="accordion" class="panel-group">
+	<% @data[:valid_time_period].each_with_index do |period, idx| %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#accordion_<%= "#{idx}" %>">1. Receipt for <strong><%= period %></strong></a>
+				</h4>
+			</div>
+			<div id="accordion_<%= "#{idx}" %>" <%if idx == @data[:valid_time_period].size - 1 %>class="panel-collapse collapse in"<%else%> class="panel-collapse collapse" <%end%>>
+				<div class="panel-body">
+					
+				</div>
+			</div>
+		</div>
+	<% end %>
+	<!-- <div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Any Notifications?</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p>You have no notifications as of now. <a href="http://www.google.com/" target="_blank">Learn more.</a></p>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Any Activities?</a>
+			</h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse">
+			<div class="panel-body">
+				<p>No Activities logged for you, yet. <a href="http://www.google.com/" target="_blank">Learn more.</a></p>
+			</div>
+		</div>
+	</div> -->
+</div>
+<% else %>
+	<div class="panel-body">
+		<p>No Activities logged for you, yet. <a href="https://www.google.co.in/search?q=APRIL+fool&source=lnms&tbm=isch&sa=X&ei=jSi6VP7LNJffsAS9l4HgDg&ved=0CAgQ_AUoAQ&biw=1375&bih=805" target="_blank">Learn more.</a></p>
+	</div>
+<% end %>
